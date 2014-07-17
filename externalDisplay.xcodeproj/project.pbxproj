@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		194D64DF1978344C0053E433 /* AddQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D64DE1978344C0053E433 /* AddQuestionVC.swift */; };
+		194D64E11978349D0053E433 /* ExternalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D64E01978349D0053E433 /* ExternalController.swift */; };
 		19848BCE197440AA00AFCAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19848BCD197440AA00AFCAF5 /* AppDelegate.swift */; };
 		19848BD0197440AA00AFCAF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19848BCF197440AA00AFCAF5 /* ViewController.swift */; };
 		19848BD3197440AA00AFCAF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19848BD1197440AA00AFCAF5 /* Main.storyboard */; };
 		19848BD5197440AA00AFCAF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19848BD4197440AA00AFCAF5 /* Images.xcassets */; };
 		19848BE1197440AA00AFCAF5 /* externalDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19848BE0197440AA00AFCAF5 /* externalDisplayTests.swift */; };
+		19CB45071974848E00C8916A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CB45061974848E00C8916A /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		194D64DE1978344C0053E433 /* AddQuestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionVC.swift; sourceTree = "<group>"; };
+		194D64E01978349D0053E433 /* ExternalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalController.swift; sourceTree = "<group>"; };
 		19848BC8197440AA00AFCAF5 /* externalDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = externalDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19848BCC197440AA00AFCAF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19848BCD197440AA00AFCAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +39,8 @@
 		19848BDA197440AA00AFCAF5 /* externalDisplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = externalDisplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19848BDF197440AA00AFCAF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19848BE0197440AA00AFCAF5 /* externalDisplayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = externalDisplayTests.swift; sourceTree = "<group>"; };
+		19CB45051974847F00C8916A /* externalDisplay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = externalDisplay.entitlements; sourceTree = "<group>"; };
+		19CB45061974848E00C8916A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19CB45071974848E00C8916A /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +65,7 @@
 		19848BBF197440AA00AFCAF5 = {
 			isa = PBXGroup;
 			children = (
+				19CB45061974848E00C8916A /* CloudKit.framework */,
 				19848BCA197440AA00AFCAF5 /* externalDisplay */,
 				19848BDD197440AA00AFCAF5 /* externalDisplayTests */,
 				19848BC9197440AA00AFCAF5 /* Products */,
@@ -75,8 +84,11 @@
 		19848BCA197440AA00AFCAF5 /* externalDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				19CB45051974847F00C8916A /* externalDisplay.entitlements */,
 				19848BCD197440AA00AFCAF5 /* AppDelegate.swift */,
 				19848BCF197440AA00AFCAF5 /* ViewController.swift */,
+				194D64DE1978344C0053E433 /* AddQuestionVC.swift */,
+				194D64E01978349D0053E433 /* ExternalController.swift */,
 				19848BD1197440AA00AFCAF5 /* Main.storyboard */,
 				19848BD4197440AA00AFCAF5 /* Images.xcassets */,
 				19848BCB197440AA00AFCAF5 /* Supporting Files */,
@@ -158,6 +170,12 @@
 				TargetAttributes = {
 					19848BC7197440AA00AFCAF5 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = T27YZ9BC89;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					19848BD9197440AA00AFCAF5 = {
 						CreatedOnToolsVersion = 6.0;
@@ -209,6 +227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				19848BD0197440AA00AFCAF5 /* ViewController.swift in Sources */,
+				194D64DF1978344C0053E433 /* AddQuestionVC.swift in Sources */,
+				194D64E11978349D0053E433 /* ExternalController.swift in Sources */,
 				19848BCE197440AA00AFCAF5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,9 +347,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = externalDisplay/externalDisplay.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = externalDisplay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -338,9 +362,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = externalDisplay/externalDisplay.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = externalDisplay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -397,6 +425,7 @@
 				19848BE6197440AA00AFCAF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19848BE7197440AA00AFCAF5 /* Build configuration list for PBXNativeTarget "externalDisplayTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +434,7 @@
 				19848BE9197440AA00AFCAF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
