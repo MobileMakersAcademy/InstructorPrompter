@@ -16,7 +16,7 @@ let timeInterval = 1.0
 
 class QuestionCell : UITableViewCell
 {
-    @IBOutlet var questionTextView: UITextView
+    @IBOutlet weak var questionLabel: UILabel!
 
 }
 func reloadTableViewOnMainThread(tableView:UITableView) {
@@ -38,11 +38,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var questions : [CKRecord] = Array()
     var questionsForTable : [CKRecord] = Array()
 
-    @IBOutlet var micOnSwitch: UISwitch
-    @IBOutlet var tableView: UITableView
-    @IBOutlet var micOffSwitch: UISwitch
-    @IBOutlet var repeatQuestionSwitch: UISwitch
-    @IBOutlet var showQuestionSwitch: UISwitch
+    @IBOutlet var micOnSwitch: UISwitch!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var micOffSwitch: UISwitch!
+    @IBOutlet var repeatQuestionSwitch: UISwitch!
+    @IBOutlet var showQuestionSwitch: UISwitch!
+    @IBOutlet weak var showRepeatComment: UISwitch!
 
     var log = ""
 
@@ -73,7 +74,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         var destVC = segue.destinationViewController as AddQuestionVC
         destVC.tableView = tableView
-        destVC.questions = questions
+        destVC.questions = questionsForTable
+        if segue.identifier == "fromTableViewCell"
+        {
+            destVC.currentQuestionIndexPath = self.tableView.indexPathForSelectedRow()
+        }
     }
 
     func wantsQuestionRepeated(records : [CKRecord]) -> Bool
@@ -86,6 +91,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         return false;
+    }
+
+    func showRepeatComment(records : [CKRecord]) -> Bool{
+        for record in records
+        {
+            if record.objectForKey("repeatQuestion") as Int == 5
+            {
+                return true
+            }
+        }
+        return false
     }
 
     func wantsMicOn(records : [CKRecord]) -> Bool
@@ -174,6 +190,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.micOffSwitch.on = false
             self.micOnSwitch.on = false
             self.showQuestionSwitch.on = false
+            self.showRepeatComment.on = false
 
             if let controlRecord = self.getControlRecord()
             {
@@ -187,6 +204,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.micOffSwitch.on = true
                 case 4:
                     self.showQuestionSwitch.on = true
+                case 5:
+                    self.showRepeatComment.on = true
                 default:
                     println()
                 }
@@ -255,6 +274,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             {
                 setControlRecordWithValue(4)
             }
+        case 4:
+            if sender.on
+            {
+                setControlRecordWithValue(5)
+            }
         default:
             println()
         }
@@ -313,6 +337,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         {
                             self.externalController.messageArea.text = "Turn Mic On"
                             self.externalController.view.backgroundColor = UIColor.redColor()
+                        }
+                        else if self.showRepeatComment (records as [CKRecord])
+                        {
+                            self.externalController.messageArea.text = "Repeat Comment"
+                            self.externalController.view.backgroundColor = UIColor.greenColor()
                         }
                         else if self.wantsMicOff(records as [CKRecord])
                         {
@@ -403,7 +432,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell") as QuestionCell
-        cell.questionTextView.text = questionsForTable[indexPath.row].objectForKey("message") as String
+        cell.questionLabel.text = questionsForTable[indexPath.row].objectForKey("message") as String
         return cell
     }
 

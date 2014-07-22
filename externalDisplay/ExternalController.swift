@@ -11,7 +11,7 @@ import CloudKit
 
 class ExternalController : UIViewController
 {
-    @IBOutlet var messageArea: UILabel
+    @IBOutlet var messageArea: UILabel!
 
     override func viewDidAppear(animated: Bool)
     {

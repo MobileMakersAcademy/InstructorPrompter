@@ -14,9 +14,10 @@ class AddQuestionVC : UIViewController
 
     var tableView :UITableView!
     var questions : [CKRecord]!
+    var currentQuestionIndexPath : NSIndexPath!
 
     var publicDatabase = CKContainer.defaultContainer().publicCloudDatabase
-    @IBOutlet var textView: UITextView
+    @IBOutlet var textView: UITextView!
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -37,12 +38,22 @@ class AddQuestionVC : UIViewController
 
     @IBAction func doneButtonTapped(sender: AnyObject) {
 
-        var record = CKRecord(recordType: "Message")
-        record.setObject(textView.text, forKey: "message")
-        record.setObject(0, forKey: "repeatQuestion")
-        record.setObject(0, forKey: "showQuestion")
-        record.setObject(1, forKey: "isQuestion")
-        record.setObject(largestOrderCount(questions) + 1, forKey: "order")
+        var record : CKRecord
+        if currentQuestionIndexPath
+        {
+            record = questions[currentQuestionIndexPath.row]
+            record.setObject(textView.text, forKey: "message")
+
+        }
+        else
+        {
+            record = CKRecord(recordType: "Message")
+            record.setObject(textView.text, forKey: "message")
+            record.setObject(0, forKey: "repeatQuestion")
+            record.setObject(0, forKey: "showQuestion")
+            record.setObject(1, forKey: "isQuestion")
+            record.setObject(largestOrderCount(questions) + 1, forKey: "order")
+        }
         publicDatabase.saveRecord(record, completionHandler: ({record,error in
             if error
             {
@@ -58,7 +69,17 @@ class AddQuestionVC : UIViewController
                 reloadTableViewOnMainThread(self.tableView)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            }))
+        }))
+    }
+
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        if currentQuestionIndexPath
+        {
+            self.textView.text = questions[currentQuestionIndexPath.row].objectForKey("message") as String
+            println(self.textView.text)
+        }
     }
     
 }
