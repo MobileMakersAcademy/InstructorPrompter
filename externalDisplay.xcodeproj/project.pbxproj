@@ -14,6 +14,7 @@
 		19848BD3197440AA00AFCAF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19848BD1197440AA00AFCAF5 /* Main.storyboard */; };
 		19848BD5197440AA00AFCAF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19848BD4197440AA00AFCAF5 /* Images.xcassets */; };
 		19848BE1197440AA00AFCAF5 /* externalDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19848BE0197440AA00AFCAF5 /* externalDisplayTests.swift */; };
+		198E5258197F125300320710 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E5257197F125300320710 /* ActionsViewController.swift */; };
 		19CB45071974848E00C8916A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CB45061974848E00C8916A /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		19848BDA197440AA00AFCAF5 /* externalDisplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = externalDisplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19848BDF197440AA00AFCAF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19848BE0197440AA00AFCAF5 /* externalDisplayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = externalDisplayTests.swift; sourceTree = "<group>"; };
+		198E5257197F125300320710 /* ActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		19CB45051974847F00C8916A /* externalDisplay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = externalDisplay.entitlements; sourceTree = "<group>"; };
 		19CB45061974848E00C8916A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				19CB45051974847F00C8916A /* externalDisplay.entitlements */,
+				198E5257197F125300320710 /* ActionsViewController.swift */,
 				19848BCD197440AA00AFCAF5 /* AppDelegate.swift */,
 				19848BCF197440AA00AFCAF5 /* ViewController.swift */,
 				194D64DE1978344C0053E433 /* AddQuestionVC.swift */,
@@ -229,6 +232,7 @@
 				19848BD0197440AA00AFCAF5 /* ViewController.swift in Sources */,
 				194D64DF1978344C0053E433 /* AddQuestionVC.swift in Sources */,
 				194D64E11978349D0053E433 /* ExternalController.swift in Sources */,
+				198E5258197F125300320710 /* ActionsViewController.swift in Sources */,
 				19848BCE197440AA00AFCAF5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

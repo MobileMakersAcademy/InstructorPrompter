@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 
+let recordType = "Message"
 class myAction : UIAlertAction{
     var tag : Int?
 }
@@ -25,7 +26,7 @@ func reloadTableViewOnMainThread(tableView:UITableView) {
     })
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ActionsViewControllerProtocol {
 
     var externalWindow :UIWindow!
     var externalDisplay : UIScreen!
@@ -44,9 +45,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var repeatQuestionSwitch: UISwitch!
     @IBOutlet var showQuestionSwitch: UISwitch!
     @IBOutlet weak var showRepeatComment: UISwitch!
+    @IBOutlet weak var selectActionButton: UIButton!
 
     var log = ""
 
+    @IBAction func actionButtonTapped(sender: AnyObject) {
+    }
 
     func timerFired(theTimer : NSTimer)
     {
@@ -72,12 +76,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)
     {
-        var destVC = segue.destinationViewController as AddQuestionVC
-        destVC.tableView = tableView
-        destVC.questions = questionsForTable
+        if segue.identifier == "fromAddButton"
+        {
+            var destVC = segue.destinationViewController as AddQuestionVC
+            destVC.tableView = tableView
+            destVC.questions = questionsForTable
+            destVC.currentQuestionIndexPath = self.tableView.indexPathForSelectedRow()
+        }
         if segue.identifier == "fromTableViewCell"
         {
+            var destVC = segue.destinationViewController as AddQuestionVC
+            destVC.tableView = tableView
+            destVC.questions = questionsForTable
             destVC.currentQuestionIndexPath = self.tableView.indexPathForSelectedRow()
+        }
+        if segue.identifier == "popOver"
+        {
+            var destVC = segue.destinationViewController as ActionsViewController
+            destVC.delegate = self
         }
     }
 
@@ -186,28 +202,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func updateData(records : [CKRecord])
     {
         dispatch_async(dispatch_get_main_queue(), {
-            self.showQuestionSwitch.on = false
-            self.micOffSwitch.on = false
-            self.micOnSwitch.on = false
-            self.showQuestionSwitch.on = false
-            self.showRepeatComment.on = false
+//            self.showQuestionSwitch.on = false
+//            self.micOffSwitch.on = false
+//            self.micOnSwitch.on = false
+//            self.showQuestionSwitch.on = false
+//            self.showRepeatComment.on = false
+            self.selectActionButton.setTitle("Action", forState: .Normal)
 
             if let controlRecord = self.getControlRecord()
             {
                 switch controlRecord.objectForKey("repeatQuestion") as Int
                     {
                 case 1:
-                    self.repeatQuestionSwitch.on = true
+                    self.selectActionButton.setTitle("Repeat Question", forState: .Normal)
                 case 2:
-                    self.micOnSwitch.on = true
+                    self.selectActionButton.setTitle("Mic On", forState: .Normal)
                 case 3:
-                    self.micOffSwitch.on = true
+                    self.selectActionButton.setTitle("Mic Off", forState: .Normal)
                 case 4:
-                    self.showQuestionSwitch.on = true
+                    self.selectActionButton.setTitle("Showing Questions", forState: .Normal)
                 case 5:
-                    self.showRepeatComment.on = true
+                    self.selectActionButton.setTitle("Repeat Comment", forState: .Normal)
                 default:
-                    println()
+                    self.selectActionButton.setTitle("Action", forState: .Normal)
                 }
             }
         })
@@ -250,40 +267,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 
-    @IBAction func switchChanged(sender: UISwitch) {
-
-        switch sender.tag
+    func choiceMade(theChoice: String)
+    {
+        switch theChoice
             {
-        case 0:
-            if sender.on
-            {
-                setControlRecordWithValue(2)
-            }
-        case 1:
-            if sender.on
-            {
-                setControlRecordWithValue(3)
-            }
-        case 2:
-            if sender.on
-            {
+        case "Repeat Question" :
                 setControlRecordWithValue(1)
-            }
-        case 3:
-            if sender.on
-            {
-                setControlRecordWithValue(4)
-            }
-        case 4:
-            if sender.on
-            {
-                setControlRecordWithValue(5)
-            }
+        case "Repeat Comment" :
+            setControlRecordWithValue(5)
+        case "Mic On" :
+            setControlRecordWithValue(2)
+        case "Mic Off" :
+            setControlRecordWithValue(3)
+        case "Show Questions" :
+            setControlRecordWithValue(4)
         default:
-            println()
-        }
-        if !sender.on
-        {
             setControlRecordWithValue(0)
         }
     }
@@ -296,7 +294,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else
         {
-            controlRecord = CKRecord(recordType: "Message")
+            controlRecord = CKRecord(recordType: recordType)
             controlRecord!.setObject("", forKey: "message")
             controlRecord!.setObject(value, forKey: "repeatQuestion")
             controlRecord!.setObject(0, forKey: "showQuestion")
