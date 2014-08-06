@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GUR-ww-q5O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GUR-ww-q5O">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -54,7 +54,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6C-Lo-9NA">
                                 <rect key="frame" x="210" y="530" width="180" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="NT0-eu-WqZ"/>
+                                    <constraint firstAttribute="width" constant="180" id="jAi-LI-A96"/>
+                                    <constraint firstAttribute="height" constant="30" id="qhu-NR-sfY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <state key="normal" title="Button" backgroundImage="redBackground">
@@ -70,13 +71,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B2A-LN-w9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2RF-Bs-PsC"/>
-                            <constraint firstItem="W6C-Lo-9NA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="210" id="NdY-jV-bSJ"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="B2A-LN-w9G" secondAttribute="bottom" constant="133" id="RpN-wq-Ufk"/>
-                            <constraint firstAttribute="trailing" secondItem="B2A-LN-w9G" secondAttribute="trailing" id="fdU-sJ-vmd"/>
-                            <constraint firstAttribute="trailing" secondItem="W6C-Lo-9NA" secondAttribute="trailing" constant="210" id="k4H-b8-7up"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W6C-Lo-9NA" secondAttribute="bottom" constant="40" id="lfg-u1-Y0D"/>
-                            <constraint firstItem="B2A-LN-w9G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="riZ-5y-sla"/>
+                            <constraint firstItem="W6C-Lo-9NA" firstAttribute="top" secondItem="B2A-LN-w9G" secondAttribute="bottom" constant="63" id="EvC-Np-p4Q"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W6C-Lo-9NA" secondAttribute="bottom" constant="40" id="N7t-xL-j8x"/>
+                            <constraint firstAttribute="trailing" secondItem="B2A-LN-w9G" secondAttribute="trailing" id="Vmh-HF-Gbe"/>
+                            <constraint firstAttribute="centerX" secondItem="W6C-Lo-9NA" secondAttribute="centerX" id="Wlp-zO-fEd"/>
+                            <constraint firstItem="B2A-LN-w9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hjC-i6-Boq"/>
+                            <constraint firstItem="B2A-LN-w9G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iZz-0y-XjV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oBs-Et-wQ5">
@@ -92,6 +92,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="9CZ-0b-bmO" id="yjQ-gg-0Z0"/>
                         <outlet property="selectActionButton" destination="W6C-Lo-9NA" id="pqf-er-Opg"/>
                         <outlet property="tableView" destination="B2A-LN-w9G" id="Vdd-RZ-8YZ"/>
                     </connections>

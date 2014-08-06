@@ -16,6 +16,7 @@ class ExternalController : UIViewController
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
+        var currentDate = NSDate()
 
     }
     override func viewDidLoad()

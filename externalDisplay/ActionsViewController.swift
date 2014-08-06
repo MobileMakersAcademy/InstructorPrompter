@@ -20,7 +20,7 @@ class ActionsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.preferredContentSize = CGSizeMake(320, 300)
         // Do any additional setup after loading the view.
     }
 
@@ -48,6 +48,7 @@ class ActionsViewController: UITableViewController {
         self.delegate?.choiceMade(choices[indexPath.row])
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     /*
     // MARK: - Navigation
 

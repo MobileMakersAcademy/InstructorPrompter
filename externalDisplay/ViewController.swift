@@ -47,6 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var showRepeatComment: UISwitch!
     @IBOutlet weak var selectActionButton: UIButton!
 
+    @IBOutlet weak var editButton: UIBarButtonItem!
     var log = ""
 
     @IBAction func actionButtonTapped(sender: AnyObject) {
@@ -288,7 +289,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func setControlRecordWithValue(value : Int)
     {
         var controlRecord = getControlRecord()
-        if controlRecord
+        if controlRecord != nil
         {
             controlRecord!.setObject(value, forKey: "repeatQuestion")
         }
@@ -349,7 +350,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         else
                         {
                             var questionToShow = self.showQuestion(self.questionsForTable)
-                            if questionToShow && self.shouldShowQuestions(records as [CKRecord])
+                            if (questionToShow != nil) && self.shouldShowQuestions(records as [CKRecord])
                             {
                                 self.externalController.messageArea.text = questionToShow!.objectForKey("message") as String
                             }
@@ -446,6 +447,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.externalDisplay = UIScreen.screens()[1] as? UIScreen
             var supportedModes = self.externalDisplay!.availableModes as [UIScreenMode]
             var alert = UIAlertController(title:nil, message: nil, preferredStyle: .ActionSheet)
+            alert.modalPresentationStyle = UIModalPresentationStyle.Popover
             var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             alert.addAction(cancelAction)
             for i in 0 ..< supportedModes.count
@@ -469,7 +471,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 modeAction.tag = i
                 alert.addAction(modeAction)
             }
-            self.presentViewController(alert, animated: true, completion: nil)
+            var popOver = alert.popoverPresentationController
+            popOver.barButtonItem = editButton
+            popOver.permittedArrowDirections = UIPopoverArrowDirection.Any
+
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -479,16 +485,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "timerFired:", userInfo: nil, repeats: true)
 
-
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
         attachExternalDisplayIfPresent()
 
         var notification = NSNotificationCenter.defaultCenter().addObserverForName(UIScreenDidConnectNotification, object: nil, queue:NSOperationQueue.mainQueue(), usingBlock: ({notication in
             self.attachExternalDisplayIfPresent()
         }))
+
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
     }
 
     override func didReceiveMemoryWarning() {
