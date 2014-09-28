@@ -352,7 +352,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             var questionToShow = self.showQuestion(self.questionsForTable)
                             if (questionToShow != nil) && self.shouldShowQuestions(records as [CKRecord])
                             {
-                                self.externalController.messageArea.text = questionToShow!.objectForKey("message") as String
+                                self.externalController.messageArea.text = questionToShow!.objectForKey("message") as? String
                             }
                             else
                             {
@@ -431,7 +431,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell") as QuestionCell
-        cell.questionLabel.text = questionsForTable[indexPath.row].objectForKey("message") as String
+        cell.questionLabel.text = questionsForTable[indexPath.row].objectForKey("message") as? String
         return cell
     }
 
