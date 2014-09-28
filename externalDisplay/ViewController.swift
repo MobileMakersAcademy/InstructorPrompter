@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.editing = !self.tableView.editing
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if segue.identifier == "fromAddButton"
         {
@@ -303,7 +303,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             controlRecord!.setObject(0, forKey: "order")
         }
         publicDatabase.saveRecord(controlRecord, completionHandler: ({record, error in
-            if error
+            if error != nil
             {
                 self.showErrorMessageAlert(error)
             }
@@ -315,7 +315,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var pred = NSPredicate(value: true)
         var query = CKQuery(recordType: "Message", predicate: pred)
         publicDatabase.performQuery(query, inZoneWithID: nil, completionHandler: ({records, error in
-            if error
+            if error != nil
             {
                 println(error.localizedDescription)
                 self.addText(error.localizedDescription)
@@ -324,7 +324,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             {
                 self.updateData(records as [CKRecord])
                 dispatch_async(dispatch_get_main_queue(),{
-                    if self.externalController
+                    if self.externalController != nil
                     {
                         self.externalController.view.backgroundColor = UIColor.blackColor()
                         if self.wantsQuestionRepeated(records as [CKRecord])
@@ -395,7 +395,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         };
         saveOp.modifyRecordsCompletionBlock = {savedRecords, deletedRecordIDs, error in
-            if error
+            if error != nil
             {
                 self.showErrorMessageAlert(error)
             }
@@ -413,7 +413,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         {
             let recordToDelete = questionsForTable[indexPath.row];
             publicDatabase.deleteRecordWithID(recordToDelete.recordID, completionHandler: ({recordID, error in
-                if error
+                if error != nil
                 {
                     self.showErrorMessageAlert(error)
                 }
@@ -423,12 +423,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }))
         }
     }
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return questionsForTable.count
     }
 
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell") as QuestionCell
         cell.questionLabel.text = questionsForTable[indexPath.row].objectForKey("message") as String
@@ -462,7 +462,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         self.externalWindow = UIWindow(frame: self.externalDisplay!.bounds)
                         self.externalWindow!.screen = self.externalDisplay!
 
-                        self.externalController = self.storyboard.instantiateViewControllerWithIdentifier("ExternalController") as ExternalController
+                        self.externalController = self.storyboard!.instantiateViewControllerWithIdentifier("ExternalController") as ExternalController
                         self.externalWindow.rootViewController = self.externalController
 
                         self.externalWindow.makeKeyAndVisible()
@@ -472,8 +472,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 alert.addAction(modeAction)
             }
             var popOver = alert.popoverPresentationController
-            popOver.barButtonItem = editButton
-            popOver.permittedArrowDirections = UIPopoverArrowDirection.Any
+            popOver!.barButtonItem = editButton
+            popOver!.permittedArrowDirections = UIPopoverArrowDirection.Any
 
             presentViewController(alert, animated: true, completion: nil)
         }

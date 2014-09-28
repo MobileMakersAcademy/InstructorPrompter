@@ -39,7 +39,7 @@ class AddQuestionVC : UIViewController
     @IBAction func doneButtonTapped(sender: AnyObject) {
 
         var record : CKRecord
-        if currentQuestionIndexPath
+        if (currentQuestionIndexPath != nil)
         {
             record = questions[currentQuestionIndexPath.row]
             record.setObject(textView.text, forKey: "message")
@@ -55,7 +55,7 @@ class AddQuestionVC : UIViewController
             record.setObject(largestOrderCount(questions) + 1, forKey: "order")
         }
         publicDatabase.saveRecord(record, completionHandler: ({record,error in
-            if error
+            if error != nil
             {
                 dispatch_async(dispatch_get_main_queue(), {
                     var alert = UIAlertController(title: "Save Error", message: error.localizedDescription, preferredStyle: .Alert)
@@ -75,7 +75,7 @@ class AddQuestionVC : UIViewController
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        if currentQuestionIndexPath
+        if currentQuestionIndexPath != nil
         {
             self.textView.text = questions[currentQuestionIndexPath.row].objectForKey("message") as String
             println(self.textView.text)
