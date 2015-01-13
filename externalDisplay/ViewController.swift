@@ -472,8 +472,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 alert.addAction(modeAction)
             }
             var popOver = alert.popoverPresentationController
-            popOver!.barButtonItem = editButton
-            popOver!.permittedArrowDirections = UIPopoverArrowDirection.Any
+//            popOver!.barButtonItem = editButton
+//            popOver!.permittedArrowDirections = UIPopoverArrowDirection.Any
 
             presentViewController(alert, animated: true, completion: nil)
         }
